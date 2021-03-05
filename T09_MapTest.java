@@ -1,7 +1,9 @@
 package kr.or.ddit.basic;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 public class T09_MapTest {
 	public static void main(String[] args) {
@@ -30,29 +32,56 @@ public class T09_MapTest {
 		// 자료 읽기 => get(key값);
 		System.out.println("addr = " + map.get("addr"));
 		System.out.println("====================================");
+	
+		//key값들을 읽어와 자료를 출력하는 방법
 		
+		//방법1 =. keySet() 메서드 이용하기
+		// keySet()메서드 => Map의 Key값들만 읽어와 Set형으로 반환한다.
+		Set<String> keySet = map.keySet();
 		
+		System.out.println("Iterator를 이용한 방법");
 		
+		Iterator<String> it = keySet.iterator();
+		while(it.hasNext()) {
+			String key = it.next();
+			System.out.println(key + " : " + map.get(key));
+		}
+		System.out.println("------------------------------------");
 		
+		//방법2 => Set형의 데이터를 '향상된 for문'으로 처리해도 된다.
+		System.out.println("향상된 for문을 이용한 방법");
+		for (String key : keySet) {
+			System.out.println(key + " : " + map.get(key));
+		}
+		System.out.println("---------------------------------------");
 		
+		//방법3 => value값만 읽어와 출력하기 => values()메서드 이용하기
+		System.out.println("values()메서드 이용한 방법");
+		for (String value : map.values()) {
+			System.out.println(value);
+		}
+		System.out.println("------------------------------------");
 		
+		//방법4 : Map에는 Entry라는 내부 class가 만들어져있다.
+		//		이 entry클래스는 key와 value라는 멤버변수로 구성되어 있다.
+		//		Map에서 이 entry클래스들을 set형식으로 저장하여 관리한다.
 		
+		// entry 객체 전체를 가져오기 (가져온 entry들은 set형식으로 되어있다.)
+		// => entryset() 메서드를 이용하여 가져온다. 
 		
+		Set<Map.Entry<String, String>> mapSet = map.entrySet();
 		
+		//가져온 entry객체들을 순서대로 처리하기 위해서 iterator객체로 변환
+		Iterator<Map.Entry<String, String>> entryIt = mapSet.iterator();
 		
+		while(entryIt.hasNext()) {
+			Map.Entry<String, String> entry = entryIt.next();
+			
+			System.out.println("key값 : " + entry.getKey());
+			System.out.println("value값 : " + entry.getValue());
+			System.out.println();
+		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
 }
