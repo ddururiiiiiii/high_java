@@ -1,3 +1,4 @@
+package kr.or.ddit.basic;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,13 +26,18 @@ public class T06_WildcardTest {
 		appleBox.add(new Apple());
 		appleBox.add(new Apple());
 		
+		Juicer.makeJuice(fruitBox); //과일상자인 경우에는 아무런 문제없음 
+		Juicer.makeJuice(appleBox);
+		
 
 	}
 }
 
 	class Juicer{
 		
-		static void makeJuice(FruitBox<Fruit> box) {
+		//static void makeJuice(FruitBox<Fruit> box) {
+		static <T extends Fruit> void makeJuice(FruitBox<T> box) {
+		//static void makeJuice(FruitBox<?> box) {
 			
 			String fruitListStr = ""; // 과일목록
 			
